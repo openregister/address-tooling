@@ -10,9 +10,10 @@ use Mix.Config
 # or recreate for your teammates (or you later on).
 
 # Configure your database
-config :address_tooling, AddressTooling.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "address_tooling_prod",
-  pool_size: 15
+# config :address_tooling, AddressTooling.Repo,
+#   adapter: Ecto.Adapters.Postgres,
+#   username: "postgres",
+#   password: "postgres",
+#   database: "address_tooling_prod",
+#   pool_size: 15
+config :address_tooling, :db, name: "address_tooling_prod"

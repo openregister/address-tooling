@@ -8,7 +8,8 @@ use Mix.Config
 # General application configuration
 config :address_tooling_web,
   namespace: AddressTooling.Web,
-  ecto_repos: [AddressTooling.Repo]
+  ecto_repos: []
+  # ecto_repos: [AddressTooling.Repo]
 
 # Configures the endpoint
 config :address_tooling_web, AddressTooling.Web.Endpoint,

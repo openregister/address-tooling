@@ -27,9 +27,9 @@ defmodule AddressTooling.Web.ChannelCase do
 
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AddressTooling.Repo)
+    # :ok = Ecto.Adapters.SQL.Sandbox.checkout(AddressTooling.Repo)
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(AddressTooling.Repo, {:shared, self()})
+      # Ecto.Adapters.SQL.Sandbox.mode(AddressTooling.Repo, {:shared, self()})
     end
     :ok
   end

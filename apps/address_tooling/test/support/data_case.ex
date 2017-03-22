@@ -16,20 +16,20 @@ defmodule AddressTooling.DataCase do
 
   using do
     quote do
-      alias AddressTooling.Repo
+      # alias AddressTooling.Repo
 
       import Ecto
       import Ecto.Changeset
-      import Ecto.Query
+      # import Ecto.Query
       import AddressTooling.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AddressTooling.Repo)
+    # :ok = Ecto.Adapters.SQL.Sandbox.checkout(AddressTooling.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(AddressTooling.Repo, {:shared, self()})
+      # Ecto.Adapters.SQL.Sandbox.mode(AddressTooling.Repo, {:shared, self()})
     end
 
     :ok

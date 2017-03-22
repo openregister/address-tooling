@@ -32,8 +32,9 @@ defmodule AddressTooling.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:postgrex, ">= 0.0.0"},
-     {:ecto, "~> 2.1-rc"}]
+    # [{:postgrex, ">= 0.0.0"},
+    [{:ecto, "~> 2.1-rc"},
+    {:mongodb, ">= 0.0.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
@@ -43,8 +44,8 @@ defmodule AddressTooling.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"],
-     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
+    # ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+    #  "ecto.reset": ["ecto.drop", "ecto.setup"],
+    #  "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end
