@@ -29,6 +29,13 @@ defmodule AddressTooling.Address.AddressTest do
     }
   end
 
+  def example_address_with_integer_name integer_name do
+    %{
+      _id: 38076557,
+      i: integer_name
+    }
+  end
+
   test "collection" do
     assert Address.collection() == "addresses"
   end
@@ -61,6 +68,22 @@ defmodule AddressTooling.Address.AddressTest do
     Address.insert_many( [address] )
     result = Address.from_name(address_name.n) |> List.first
     assert result.n == address_name.n
+  end
+
+  test "from_name with integer string expands integer name" do
+    address = example_address_with_integer_name(126)
+
+    Address.insert_many( [address] )
+    result = Address.from_name("126") |> List.first
+    assert result.n == "126"
+  end
+
+  test "from_name with string starting with integer expands integer name" do
+    address = example_address_with_integer_name(126)
+
+    Address.insert_many( [address] )
+    result = Address.from_name("126/PRISON") |> List.first
+    assert result.n == "126"
   end
 
 end

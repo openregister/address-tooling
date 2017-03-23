@@ -31,21 +31,40 @@ defmodule AddressTooling.Address.Address do
     end
   end
 
+  def expand_integer_name(map) do
+    case map do
+      %{i: i} ->
+        map |> Map.put(:n, i |> Integer.to_string )
+      _ -> map
+    end
+  end
+
   def expand address do
     address
     |> expand_address_name()
+    |> expand_integer_name()
   end
 
   def from_address_names address_names do
     address_names
     |> Enum.map(& &1._id)
-    |> Enum.flat_map(& Address.from(%{a: &1}))
+    |> Enum.flat_map(& Address.from(%{a: &1}, expand: true))
   end
 
   def from_name text do
-    AddressName.from_name(text)
-    |> from_address_names()
-    |> Enum.concat( Address.from(%{n: text}, timeout: 300_000) )
+    case Integer.parse(text) do
+      {integer, ""} ->
+        Address.from(%{i: integer}, expand: true, timeout: 300_000)
+      {integer, _} ->
+        AddressName.from_name(text)
+        |> from_address_names()
+        |> Enum.concat( Address.from(%{n: text}, expand: true, timeout: 300_000) )
+        |> Enum.concat( Address.from(%{i: integer}, expand: true, timeout: 300_000) )
+      :error ->
+        AddressName.from_name(text)
+        |> from_address_names()
+        |> Enum.concat( Address.from(%{n: text}, expand: true, timeout: 300_000) )
+    end
   end
 
 end
