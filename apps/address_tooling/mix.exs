@@ -34,7 +34,8 @@ defmodule AddressTooling.Mixfile do
   defp deps do
     # [{:postgrex, ">= 0.0.0"},
     [{:ecto, "~> 2.1-rc"},
-    {:mongodb, ">= 0.0.0"}]
+    {:mongodb, ">= 0.0.0"},
+    {:data_morph, ">= 0.0.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
