@@ -3,6 +3,7 @@ defmodule AddressTooling.Address.AddressTest do
   use ExUnit.Case
 
   alias AddressTooling.Address.Address
+  alias AddressTooling.Address.AddressName
 
   setup do
     Mongo.delete_many(:mongo, Address.collection(), %{})
@@ -18,6 +19,13 @@ defmodule AddressTooling.Address.AddressTest do
       p: "L9 7LH",
       s: 23602321,
       t: 11
+    }
+  end
+
+  def example_address_with_address_name address_name_id do
+    %{
+      _id: 38076557,
+      a: address_name_id
     }
   end
 
@@ -43,6 +51,16 @@ defmodule AddressTooling.Address.AddressTest do
     Address.insert_many( [address] )
     result = Address.from_name(address.n) |> List.first
     assert result._id == address._id
+  end
+
+  test "from_name expands linked address name" do
+    address_name = AddressTooling.Address.AddressNameTest.example_address_name()
+    address = example_address_with_address_name(address_name._id)
+
+    AddressName.insert_many( [address_name] )
+    Address.insert_many( [address] )
+    result = Address.from_name(address_name.n) |> List.first
+    assert result.n == address_name.n
   end
 
 end

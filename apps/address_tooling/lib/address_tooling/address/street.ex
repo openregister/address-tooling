@@ -10,8 +10,6 @@ defmodule AddressTooling.Address.Street do
     field :n, :string                    # address name as text - optional
     field :t, :string                    # town _id
     field :w, :string                    # welsh name
-
-    timestamps()
   end
 
 end

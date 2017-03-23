@@ -2,6 +2,9 @@ defmodule AddressTooling.Address.Address do
   use Ecto.Schema
   use AddressTooling.Store, collection: "addresses"
 
+  alias AddressTooling.Address.Address
+  alias AddressTooling.Address.AddressName
+
   schema "addresses" do
     field :_id, :integer                 # UPRN and mongodb id
     field :a, :integer                   # address name id - optional
@@ -17,7 +20,32 @@ defmodule AddressTooling.Address.Address do
     field :t, :string                    # town _id
     field :y, :string                    # property type
     field :w, :string                    # welsh name
-
-    timestamps()
   end
+
+  def expand_address_name(map) do
+    case map do
+      %{a: id} ->
+        name = AddressName.from_id(id)
+        map |> Map.put(:n, name.n)
+      _ -> map
+    end
+  end
+
+  def expand address do
+    address
+    |> expand_address_name()
+  end
+
+  def from_address_names address_names do
+    address_names
+    |> Enum.map(& &1._id)
+    |> Enum.flat_map(& Address.from(%{a: &1}))
+  end
+
+  def from_name text do
+    AddressName.from_name(text)
+    |> from_address_names()
+    |> Enum.concat( Address.from(%{n: text}, timeout: 300_000) )
+  end
+
 end
