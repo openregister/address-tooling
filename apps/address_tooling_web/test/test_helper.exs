@@ -1,4 +1,3 @@
 ExUnit.start()
 
-Ecto.Adapters.SQL.Sandbox.mode(AddressTooling.Repo, :manual)
-
+# Ecto.Adapters.SQL.Sandbox.mode(AddressTooling.Repo, :manual)

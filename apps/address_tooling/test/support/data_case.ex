@@ -16,20 +16,20 @@ defmodule AddressTooling.DataCase do
 
   using do
     quote do
-      alias AddressTooling.Repo
+      # alias AddressTooling.Repo
 
       import Ecto
       import Ecto.Changeset
-      import Ecto.Query
+      # import Ecto.Query
       import AddressTooling.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(AddressTooling.Repo)
+    # :ok = Ecto.Adapters.SQL.Sandbox.checkout(AddressTooling.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(AddressTooling.Repo, {:shared, self()})
+      # Ecto.Adapters.SQL.Sandbox.mode(AddressTooling.Repo, {:shared, self()})
     end
 
     :ok
@@ -49,5 +49,26 @@ defmodule AddressTooling.DataCase do
         String.replace(acc, "%{#{key}}", to_string(value))
       end)
     end
+  end
+
+  alias AddressTooling.Address.Address
+  alias AddressTooling.Address.AddressName
+  alias AddressTooling.Address.Street
+  alias AddressTooling.Address.Town
+
+  def insert_address map do
+    Address.insert_many( [map] )
+  end
+
+  def insert_address_name map do
+    AddressName.insert_many( [map] )
+  end
+
+  def insert_street map do
+    Street.insert_many( [map] )
+  end
+
+  def insert_town map do
+    Town.insert_many( [map] )
   end
 end

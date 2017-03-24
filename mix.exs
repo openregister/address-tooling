@@ -21,6 +21,8 @@ defmodule AddressTooling.Umbrella.Mixfile do
   # Dependencies listed here are available only for this project
   # and cannot be accessed from applications inside the apps folder
   defp deps do
-    []
+    [
+      {:mix_test_watch, "~> 0.2"}
+    ]
   end
 end
