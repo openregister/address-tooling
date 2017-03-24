@@ -21,7 +21,7 @@ defmodule AddressTooling.Application do
       # supervisor(AddressTooling.Endpoint, []),
       # 1. Start mongo
       worker(Mongo, [[database:
-        Application.get_env(:address_tooling, :db)[:name], name: :mongo]])
+        Application.get_env(:address_tooling, :db)[:name], name: :mongo, timeout: 1_200_001]])
     ]
 
     opts = [strategy: :one_for_one, name: AddressTooling.Supervisor]

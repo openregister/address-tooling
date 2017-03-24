@@ -74,16 +74,16 @@ defmodule AddressTooling.Store do
 
       def insert_many([]), do: IO.puts "nothing to insert in #{collection()}"
       def insert_many list do
-        Mongo.insert_many(:mongo, collection(), list, continue_on_error: true, timeout: 120_000)
+        Mongo.insert_many(:mongo, collection(), list, continue_on_error: true, timeout: 120_002)
         # IO.puts "#{count()} #{collection()} are persisted"
       end
 
       def count do
-        {:ok, count} = Mongo.count(:mongo, collection(), nil, timeout: 120_000)
+        {:ok, count} = Mongo.count(:mongo, collection(), nil, timeout: 120_003)
         count
       end
 
-      def from_name(name), do: from %{n: name}
+      def from_name(name), do: from %{n: name}, timeout: 120_006
 
       def expand(map), do: map
 
