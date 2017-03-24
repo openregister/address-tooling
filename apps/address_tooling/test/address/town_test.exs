@@ -42,4 +42,11 @@ defmodule AddressTooling.Address.TownTest do
     assert result._id == town._id
   end
 
+  test "from_area" do
+    town = example_town()
+    insert_town town
+    result = Town.from_area(town.area) |> List.first
+    assert result._id == town._id
+  end
+
 end

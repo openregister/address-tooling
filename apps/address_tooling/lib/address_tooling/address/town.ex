@@ -8,4 +8,6 @@ defmodule AddressTooling.Address.Town do
     field :n, :string                    # name
   end
 
+  def from_area(area), do: from %{area: area}, timeout: 120_006
+
 end
