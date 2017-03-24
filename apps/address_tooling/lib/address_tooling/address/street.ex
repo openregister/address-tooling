@@ -12,4 +12,7 @@ defmodule AddressTooling.Address.Street do
     field :w, :string                    # welsh name
   end
 
+  def from_town_id id do
+    from(%{t: id}, timeout: 120_008)
+  end
 end
