@@ -4,6 +4,7 @@ defmodule AddressTooling.Address.Address do
 
   alias AddressTooling.Address.Address
   alias AddressTooling.Address.AddressName
+  alias AddressTooling.Address.Street
 
   schema "addresses" do
     field :_id, :integer                 # UPRN and mongodb id
@@ -39,10 +40,31 @@ defmodule AddressTooling.Address.Address do
     end
   end
 
+  def expand_street address do
+    street = if address |> Map.has_key?(:s) do
+      address.s |> Street.from_id()
+    else
+      nil
+    end
+    case street do
+      nil ->
+        address
+        |> Map.put(:street, nil)
+        |> Map.put(:locality, nil)
+        |> Map.put(:town, nil)
+      _ ->
+        address
+        |> Map.put(:street, street.n)
+        |> Map.put(:locality, street[:l])
+        |> Map.put(:town, street[:town])
+    end
+  end
+
   def expand address do
     address
     |> expand_address_name()
     |> expand_integer_name()
+    |> expand_street()
   end
 
   def from_address_names address_names do
@@ -67,4 +89,11 @@ defmodule AddressTooling.Address.Address do
     end
   end
 
+  def from_street_id id, opts \\ [expand: true] do
+    from(%{s: id}, opts |> Keyword.merge([timeout: 120_009]))
+  end
+
+  def from_parent_id id, opts \\ [expand: true] do
+    from(%{par: id}, opts |> Keyword.merge([timeout: 300_000]))
+  end
 end

@@ -30,4 +30,5 @@ defmodule AddressTooling.Match.Street do
     |> Enum.flat_map(&streets/1)
     |> Enum.filter(& &1 |> street_match?(lines))
   end
+
 end

@@ -6,7 +6,7 @@ defmodule AddressTooling.Match.StreetTest do
   alias AddressTooling.Match.Street
   alias AddressTooling.Address.Street, as: Streets
 
-  setup do
+  def setup do
     AddressTooling.Match.TownTest.setup()
     Mongo.delete_many(:mongo, Streets.collection(), %{})
     insert_street(%{
@@ -34,6 +34,10 @@ defmodule AddressTooling.Match.StreetTest do
       n: "HIGH STREET",
       t: 16
     })
+  end
+
+  setup do
+    setup()
     :ok
   end
 
