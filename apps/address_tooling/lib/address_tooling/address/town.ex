@@ -10,4 +10,7 @@ defmodule AddressTooling.Address.Town do
 
   def from_area(area), do: from %{area: area}, timeout: 120_006
 
+  def from_name_area(town, area) do
+    from(%{ n: town, area: area }, timeout: 120_007)
+  end
 end
