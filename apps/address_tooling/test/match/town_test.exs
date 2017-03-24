@@ -5,7 +5,7 @@ defmodule AddressTooling.Match.TownTest do
   alias AddressTooling.Match.Town
   alias AddressTooling.Address.Town, as: Towns
 
-  setup do
+  def setup do
     Mongo.delete_many(:mongo, Towns.collection(), %{})
     insert_town(%{
       _id: 11,
@@ -27,6 +27,15 @@ defmodule AddressTooling.Match.TownTest do
       n: "TOWNSVILLE",
       area: "BATHSHIRE"
     })
+    insert_town(%{
+      _id: 16,
+      n: "SMALLSVILLE",
+      area: "BATHSHIRE"
+    })
+  end
+
+  setup do
+    setup()
     :ok
   end
 

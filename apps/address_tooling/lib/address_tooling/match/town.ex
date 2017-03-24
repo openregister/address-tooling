@@ -6,8 +6,6 @@ defmodule AddressTooling.Match.Town do
     town = line1 |> String.upcase
     area = line2 |> String.upcase
 
-    IO.puts town
-    IO.puts area
     towns = if town == area do
       Towns.from_name_area(town, area)
     else
