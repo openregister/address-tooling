@@ -1,6 +1,7 @@
 defmodule AddressTooling.Address.TownTest do
 
   use ExUnit.Case
+  import AddressTooling.DataCase
 
   alias AddressTooling.Address.Town
 
@@ -23,20 +24,20 @@ defmodule AddressTooling.Address.TownTest do
 
   test "insert_many" do
     assert Town.count() == 0
-    Town.insert_many( [example_town()] )
+    insert_town example_town()
     assert Town.count() == 1
   end
 
   test "from_id" do
     town = example_town()
-    Town.insert_many( [town] )
+    insert_town town
     result = Town.from_id(town._id)
     assert result._id == town._id
   end
 
   test "from_name" do
     town = example_town()
-    Town.insert_many( [town] )
+    insert_town town
     result = Town.from_name(town.n) |> List.first
     assert result._id == town._id
   end

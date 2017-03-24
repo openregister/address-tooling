@@ -1,6 +1,7 @@
 defmodule AddressTooling.Address.StreetTest do
 
   use ExUnit.Case
+  import AddressTooling.DataCase
 
   alias AddressTooling.Address.Street
 
@@ -24,20 +25,20 @@ defmodule AddressTooling.Address.StreetTest do
 
   test "insert_many" do
     assert Street.count() == 0
-    Street.insert_many( [example_street()] )
+    insert_street example_street()
     assert Street.count() == 1
   end
 
   test "from_id" do
     street = example_street()
-    Street.insert_many( [street] )
+    insert_street street
     result = Street.from_id(street._id)
     assert result._id == street._id
   end
 
   test "from_name" do
     street = example_street()
-    Street.insert_many( [street] )
+    insert_street street
     result = Street.from_name(street.n) |> List.first
     assert result._id == street._id
   end

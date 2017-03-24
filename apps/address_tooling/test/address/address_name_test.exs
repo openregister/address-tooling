@@ -1,6 +1,7 @@
 defmodule AddressTooling.Address.AddressNameTest do
 
   use ExUnit.Case
+  import AddressTooling.DataCase
 
   alias AddressTooling.Address.AddressName
 
@@ -28,14 +29,14 @@ defmodule AddressTooling.Address.AddressNameTest do
 
   test "from_id" do
     address_name = example_address_name()
-    AddressName.insert_many( [address_name] )
+    insert_address_name address_name
     result = AddressName.from_id(address_name._id)
     assert result._id == address_name._id
   end
 
   test "from_name" do
     address_name = example_address_name()
-    AddressName.insert_many( [address_name] )
+    insert_address_name address_name
     result = AddressName.from_name(address_name.n) |> List.first
     assert result._id == address_name._id
   end

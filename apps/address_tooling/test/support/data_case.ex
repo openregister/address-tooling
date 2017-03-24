@@ -50,4 +50,25 @@ defmodule AddressTooling.DataCase do
       end)
     end
   end
+
+  alias AddressTooling.Address.Address
+  alias AddressTooling.Address.AddressName
+  alias AddressTooling.Address.Street
+  alias AddressTooling.Address.Town
+
+  def insert_address map do
+    Address.insert_many( [map] )
+  end
+
+  def insert_address_name map do
+    AddressName.insert_many( [map] )
+  end
+
+  def insert_street map do
+    Street.insert_many( [map] )
+  end
+
+  def insert_town map do
+    Town.insert_many( [map] )
+  end
 end
